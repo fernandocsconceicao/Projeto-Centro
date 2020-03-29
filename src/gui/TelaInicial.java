@@ -5,8 +5,11 @@
  */
 package gui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -20,10 +23,12 @@ import javax.imageio.ImageIO;
 public class TelaInicial extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaInicial
+     * Crea
+     * tes new form TelaInicial
      */
     public TelaInicial() {
         initComponents();
+        this.setSize(1085,682 );
     }
 
     /**
@@ -36,9 +41,15 @@ public class TelaInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         jbtnImagem = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jtfNome = new javax.swing.JTextField();
+        lblNomeAtr1 = new javax.swing.JLabel();
+        lblNomeAtr = new javax.swing.JLabel();
+        jlblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(240, 240, 2));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         jbtnImagem.setText("Imagem");
         jbtnImagem.addActionListener(new java.awt.event.ActionListener() {
@@ -46,53 +57,85 @@ public class TelaInicial extends javax.swing.JFrame {
                 jbtnImagemActionPerformed(evt);
             }
         });
+        getContentPane().add(jbtnImagem);
+        jbtnImagem.setBounds(460, 590, 180, 50);
 
-        jTextField1.setText("jTextField1");
+        jtfNome.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        jtfNome.setText("321321");
+        jtfNome.setBorder(null);
+        jtfNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfNomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jtfNome);
+        jtfNome.setBounds(180, 60, 660, 40);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(280, 280, 280)
-                        .addComponent(jbtnImagem))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(294, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
-                .addComponent(jbtnImagem)
-                .addGap(50, 50, 50))
-        );
+        lblNomeAtr1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Nome_Rect.png"))); // NOI18N
+        getContentPane().add(lblNomeAtr1);
+        lblNomeAtr1.setBounds(150, 50, 780, 62);
+
+        lblNomeAtr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Nome.png"))); // NOI18N
+        lblNomeAtr.setText("jLabel1");
+        getContentPane().add(lblNomeAtr);
+        lblNomeAtr.setBounds(50, 60, 90, 40);
+
+        jlblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Fundo.png"))); // NOI18N
+        getContentPane().add(jlblBackground);
+        jlblBackground.setBounds(0, 0, 1085, 682);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNomeActionPerformed
+
     private void jbtnImagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnImagemActionPerformed
-     // TODO add your handling code here:
-     try{
-     int largura = 842;
-     int altura = 595;
-     BufferedImage buffImg= new BufferedImage(largura,altura,BufferedImage.TYPE_INT_RGB);
-     
-     Graphics2D g2d= buffImg.createGraphics();
-     BufferedImage fundo = ImageIO.read(new File("imagens/Fundo3.png"));
-    
-     
-     g2d.drawImage(fundo,0,0,null);
-     g2d.dispose();
-     File file = new File("fundo3.png");
-     ImageIO.write(fundo,"png", file);
-     }  catch (IOException ex) {
-           System.out.println(ex.getMessage());
+        // TODO add your handling code here:
+        try{
+            int largura = 842;
+            int altura = 595;
+            BufferedImage buffImg= new BufferedImage(largura,altura,BufferedImage.TYPE_INT_ARGB);
+
+            Graphics2D g2d= buffImg.createGraphics();
+ 
+            BufferedImage fundo = ImageIO.read(new File("imagens/Plano de fundo.png"));
+            BufferedImage texto = ImageIO.read(new File("imagens/Texto certificado.png"));
+            
+           
+            Font font =new Font("Arial", Font.BOLD, 36);
+            
+        
+      
+            g2d.drawImage(fundo, 0,0, null);
+            g2d.drawImage(texto, 0,0, null);
+
+            g2d.setColor(Color.yellow);
+            g2d.fillRect(0, 0, 200, 200);
+            g2d.rotate(-90);
+
+             
+            g2d.setColor(Color.black);
+            g2d.drawString(jtfNome.getText(), 200, 200);
+            
+            
+        
+          
+ 
+            
+           // g2d.setFont(font);
+            //g2d.setColor(Color.BLACK);
+            //g2d.drawString((jtfNome.getText()),400,250);
+            g2d.dispose();
+            
+            //File Saving
+            
+            File file = new File((jtfNome.getText())+".png");
+            ImageIO.write(buffImg,"png", file);
+            
+        }  catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_jbtnImagemActionPerformed
 
@@ -132,7 +175,10 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbtnImagem;
+    private javax.swing.JLabel jlblBackground;
+    private javax.swing.JTextField jtfNome;
+    private javax.swing.JLabel lblNomeAtr;
+    private javax.swing.JLabel lblNomeAtr1;
     // End of variables declaration//GEN-END:variables
 }
